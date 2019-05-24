@@ -9,6 +9,7 @@ Version: 1.0.0
 namespace EighteenPlus\AgeGateWordpress;
 
 use EighteenPlus\AgeGate\AgeGate;
+use EighteenPlus\AgeGate\Utils;
 
 class AgeGateWordpress
 {
@@ -34,10 +35,12 @@ class AgeGateWordpress
         if (!is_admin() && !strpos($_SERVER['REQUEST_URI'], 'wp-login.php') && !current_user_can('administrator')) {
             $logo = wp_get_attachment_image_url( get_option('agegate_site_logo'), 'thumbnail');
             
-            $a = new AgeGate(get_site_url());
-            $a->setTitle(get_option('agegate_title'));
-            $a->setLogo($logo);
-            $a->run();
+            $gate = new AgeGate(get_site_url());
+            $gate->setTitle(get_option('agegate_title'));
+            $gate->setLogo($logo);
+            $gate->setTestIp(get_option('agegate_test_ip'));
+            $gate->setStartFrom(get_option('agegate_start_from'));
+            $gate->run();
         }
     }
     
@@ -83,9 +86,13 @@ class AgeGateWordpress
     
     public function ageGateOptionsEdit()
     {
+        $ip = Utils::getClientIp();
+        
         if ($_POST) {
+            update_option('agegate_test_ip', $_POST['agegate_test_ip']);
             update_option('agegate_title', $_POST['agegate_title']);
             update_option('agegate_site_logo', $_POST['agegate_site_logo']);
+            update_option('agegate_start_from', $_POST['agegate_start_from']);
         }
         
         require __DIR__ . '/view/agegate-options.php';
