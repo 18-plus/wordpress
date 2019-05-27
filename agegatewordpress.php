@@ -3,7 +3,7 @@
 Plugin Name: 18+ AgeGate
 Description: Integrate a UK compliant age verification tool to ensure your UK based visitors confirm they are aged 18+ in a secure and anonymous way.
 Author: 18+
-Version: 1.1.0
+Version: 1.2.0
 */
 
 namespace EighteenPlus\AgeGateWordpress;
@@ -35,7 +35,7 @@ class AgeGateWordpress
         if (!is_admin() && !strpos($_SERVER['REQUEST_URI'], 'wp-login.php') && !current_user_can('administrator')) {
             $logo = wp_get_attachment_image_url( get_option('agegate_site_logo'), 'thumbnail');
             
-            if (get_option('agegate_on_off_plugin')) {                
+            if (get_option('agegate_on_off_plugin')) {
                 $gate = new AgeGate(get_site_url());
                 $gate->setTitle(get_option('agegate_title'));
                 $gate->setLogo($logo);
@@ -55,6 +55,10 @@ class AgeGateWordpress
                 $gate->setTestIp(get_option('agegate_test_ip'));
                 
                 $gate->setStartFrom(get_option('agegate_start_from'));
+                
+                $gate->setDesktopSessionLifetime(get_option('agegate_desktop_session_lifetime'));
+                $gate->setMobileSessionLifetime(get_option('agegate_mobile_session_lifetime'));
+                
                 $gate->run();
             }
         }
@@ -137,6 +141,16 @@ class AgeGateWordpress
             update_option('agegate_test_ip', $_POST['agegate_test_ip']);
             
             update_option('agegate_start_from', $_POST['agegate_start_from']);
+            
+            update_option('agegate_desktop_session_lifetime', $_POST['agegate_desktop_session_lifetime']);
+            update_option('agegate_mobile_session_lifetime', $_POST['agegate_mobile_session_lifetime']);
+        }
+        
+        $sessionLifeTime = ini_get("session.gc_maxlifetime") / 3600;
+        if ($sessionLifeTime < get_option('agegate_desktop_session_lifetime') || $sessionLifeTime < get_option('agegate_mobile_session_lifetime')) {
+            $warning = true;
+        } else {
+            $warning = false;
         }
         
         require __DIR__ . '/view/agegate-options.php';

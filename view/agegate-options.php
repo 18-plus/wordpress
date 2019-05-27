@@ -6,12 +6,12 @@
     <hr class="wp-header-end">
     
     <div class="content">
-        <form method="post">
+        <form method="post" id="agegateform">
             <div>
                 <h2><?php _e('Genaral', 'agegate'); ?></h2>
                 
                 <div class="form-group">
-                    <label class="label" for="agegate_on_off_plugin">On/Off plugin</label>
+                    <label class="label" for="agegate_on_off_plugin"><?php _e('On/Off plugin', 'agegate'); ?></label>
                     
                     <label class="switch label_for">
                         <input type="checkbox" id="agegate_on_off_plugin" value="1" name="agegate_on_off_plugin" <?=(get_option('agegate_on_off_plugin') ? 'checked' : '');?>>
@@ -62,9 +62,33 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-7 order-md-1">
                         <div class="mb-3">
-                            <label for="agegate_test_ip"><?php _e('Start from', 'agegate') ?></label>
+                            <label for="agegate_start_from"><?php _e('Start from', 'agegate') ?></label>
                             <input type="text" class="form-control" id="datetimepicker" maxlength="50" name="agegate_start_from" value="<?php echo get_option('agegate_start_from'); ?>">
                             <small><?php _e('Default starts from 15.07.2019 12AM', 'agegate'); ?></small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <?php if ($warning): ?>
+                    <div class="col-lg-12 col-md-12 order-md-1">
+                        <div class="alert alert-warning"><?php _e("Server session lifetime ({$sessionLifeTime} hours) is too short for selected values"); ?></div>
+                    </div>
+                    <?php endif; ?>
+                    
+                    <div class="col-lg-6 col-md-6 order-md-1">
+                        <div class="mb-3">
+                            <label for="agegate_desktop_session_lifetime"><?php _e('Desktop Session Lifetime', 'agegate') ?></label>
+                            <input type="number" class="form-control" min="1" max="24" id="agegate_desktop_session_lifetime" name="agegate_desktop_session_lifetime" value="<?php echo get_option('agegate_desktop_session_lifetime'); ?>">
+                            <small><?php _e('Default 24 hours', 'agegate'); ?></small>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-6 order-md-1">
+                        <div class="mb-3">
+                            <label for="agegate_mobile_session_lifetime"><?php _e('Mobile Session Lifetime', 'agegate') ?></label>
+                            <input type="number" class="form-control" min="1" max="240" id="agegate_mobile_session_lifetime" name="agegate_mobile_session_lifetime" value="<?php echo get_option('agegate_mobile_session_lifetime'); ?>">
+                            <small><?php _e('Default 24 hours', 'agegate'); ?></small>
                         </div>
                     </div>
                 </div>
@@ -81,7 +105,7 @@
 <script>
 (function() {
     
-    new TestMode();
+    new AgeGateForm();
     
     textChange();
     
@@ -91,7 +115,9 @@
     
 })();
 
-function TestMode() {
+function AgeGateForm() {
+    this.form = jQuery('#agegateform');
+    
     this.test_mode = jQuery('[name="agegate_test_mode"]');
     this.test_anyip = jQuery('[name="agegate_test_anyip"]');
     this.test_ip = jQuery('[name="agegate_test_ip"]');

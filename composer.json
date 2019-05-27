@@ -1,6 +1,7 @@
 {
     "minimum-stability": "dev",
     "require": {
-        "eighteenplus/agegate": "dev-master"
+        "eighteenplus/agegate": "dev-master",
+        "mobiledetect/mobiledetectlib": "^2.8"
     }
 }
