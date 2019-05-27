@@ -50,6 +50,10 @@ function Refresh_Image(the_id) {
     jQuery.get(ajaxurl, data, function(response) {
         if (response.success === true) {
             jQuery('#agegate-preview-image').replaceWith(response.data.image);
+            jQuery('#agegate_image_src').val(response.data.image_url);
+            if (typeof textChange != 'undefined') {                
+                textChange();
+            }
         }
     });
 }

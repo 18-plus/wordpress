@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: agegatewordpress
-Description: Integrate a UK compliant Age 18+ age verification tool to your back-end so that your UK based visitors can confirm they are age 18 or over in a secure and anonymous way.
-Author: Osoro
-Version: 1.0.0
+Plugin Name: 18+ AgeGate
+Description: Integrate a UK compliant age verification tool to ensure your UK based visitors confirm they are aged 18+ in a secure and anonymous way.
+Author: 18+
+Version: 1.1.0
 */
 
 namespace EighteenPlus\AgeGateWordpress;
@@ -35,12 +35,28 @@ class AgeGateWordpress
         if (!is_admin() && !strpos($_SERVER['REQUEST_URI'], 'wp-login.php') && !current_user_can('administrator')) {
             $logo = wp_get_attachment_image_url( get_option('agegate_site_logo'), 'thumbnail');
             
-            $gate = new AgeGate(get_site_url());
-            $gate->setTitle(get_option('agegate_title'));
-            $gate->setLogo($logo);
-            $gate->setTestIp(get_option('agegate_test_ip'));
-            $gate->setStartFrom(get_option('agegate_start_from'));
-            $gate->run();
+            if (get_option('agegate_on_off_plugin')) {                
+                $gate = new AgeGate(get_site_url());
+                $gate->setTitle(get_option('agegate_title'));
+                $gate->setLogo($logo);
+                
+                $gate->setSiteName(get_option('agegate_site_name'));
+                $gate->setCustomText(get_option('agegate_custom_text'));
+                $gate->setCustomLocation(get_option('agegate_custom_text_location'));
+                
+                $gate->setBackgroundColor(get_option('agegate_background_color'));
+                $gate->setTextColor(get_option('agegate_text_color'));
+                
+                $gate->setRemoveReference(get_option('agegate_remove_reference'));
+                $gate->setRemoveVisiting(get_option('agegate_remove_visiting'));
+                
+                $gate->setTestMode(get_option('agegate_test_mode'));
+                $gate->setTestAnyIp(get_option('agegate_test_anyip'));
+                $gate->setTestIp(get_option('agegate_test_ip'));
+                
+                $gate->setStartFrom(get_option('agegate_start_from'));
+                $gate->run();
+            }
         }
     }
     
@@ -55,7 +71,7 @@ class AgeGateWordpress
     
     public function ageGateMenu() 
     {
-        add_plugins_page('AgeGate', 'AgeGate', 'manage_options', 'edit-agegate-options', array($this, 'ageGateOptionsEdit'));
+        add_plugins_page('18+ AgeGate', '18+ AgeGate', 'manage_options', 'edit-agegate-options', array($this, 'ageGateOptionsEdit'));
     }
     
     public function load_wp_media_files($page)
@@ -65,6 +81,16 @@ class AgeGateWordpress
             wp_enqueue_media();
             // Enqueue custom script that will interact with wp.media
             wp_enqueue_script('agegate_script', plugins_url( '/js/agegate.js' , __FILE__ ), array('jquery'), '0.1');
+            
+            wp_enqueue_script('datetimepicker', plugins_url( '/js/jquery.datetimepicker.full.min.js' , __FILE__ ), array('jquery'), '0.1');
+            wp_enqueue_style('datetimepicker_css', plugins_url( '/css/jquery.datetimepicker.min.css' , __FILE__ ));
+            
+            wp_enqueue_script('bootstrap', '//cdn.rawgit.com/twbs/bootstrap/v4.1.3/dist/js/bootstrap.bundle.min.js', array('jquery'), '0.1');
+            wp_enqueue_script('bootstrap_colorpicker', plugins_url( '/js/bootstrap-colorpicker.js' , __FILE__ ), array('jquery', 'bootstrap'), '0.1');
+            wp_enqueue_style('bootstrap_css', '//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+            wp_enqueue_style('bootstrap_colorpicker_css', plugins_url( '/css/bootstrap-colorpicker.css' , __FILE__ ));
+            
+            wp_enqueue_style('agegatestyle', plugins_url( '/css/style.css' , __FILE__ ));
         }
     }
     
@@ -72,12 +98,14 @@ class AgeGateWordpress
     {
         if (isset($_GET['id'])) {
             $image = wp_get_attachment_image( filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT ), 'thumbnail', false, array( 'id' => 'agegate-preview-image' ) );
+            $image_url = wp_get_attachment_image_url( filter_input( INPUT_GET, 'id', FILTER_VALIDATE_INT ), 'thumbnail');
             if (!$image) {                
                 wp_send_json_error();
             }
             
             wp_send_json_success(array(
                 'image' => $image,
+                'image_url' => $image_url,
             ));
         } else {
             wp_send_json_error();
@@ -89,9 +117,25 @@ class AgeGateWordpress
         $ip = Utils::getClientIp();
         
         if ($_POST) {
-            update_option('agegate_test_ip', $_POST['agegate_test_ip']);
+            update_option('agegate_on_off_plugin', $_POST['agegate_on_off_plugin']);
+            
             update_option('agegate_title', $_POST['agegate_title']);
             update_option('agegate_site_logo', $_POST['agegate_site_logo']);
+            
+            update_option('agegate_site_name', $_POST['agegate_site_name']);
+            update_option('agegate_custom_text', $_POST['agegate_custom_text']);
+            update_option('agegate_custom_text_location', $_POST['agegate_custom_text_location']);
+            
+            update_option('agegate_background_color', $_POST['agegate_background_color']);
+            update_option('agegate_text_color', $_POST['agegate_text_color']);
+            
+            update_option('agegate_remove_reference', $_POST['agegate_remove_reference']);
+            update_option('agegate_remove_visiting', $_POST['agegate_remove_visiting']);
+            
+            update_option('agegate_test_mode', $_POST['agegate_test_mode']);
+            update_option('agegate_test_anyip', $_POST['agegate_test_anyip']);
+            update_option('agegate_test_ip', $_POST['agegate_test_ip']);
+            
             update_option('agegate_start_from', $_POST['agegate_start_from']);
         }
         

@@ -5,53 +5,68 @@
 	
     <hr class="wp-header-end">
     
-    <div style="background: white; padding: 20px; margin-top: 1.5em; border: 1px solid #e5e5e5;">
+    <div class="content">
         <form method="post">
-            <?php _e('Current ip:', 'agegate'); echo $ip; ?>
             <div>
-                <label>
-                    <span style="width: 100px; display: inline-block;"><?php _e('Test ip', 'agegate') ?></span>
-                    <input type="text" size="50" name="agegate_test_ip" value="<?php echo get_option('agegate_test_ip'); ?>">
-                </label>
-            </div>
-        
-            <div>
-                <label>
-                    <span style="width: 100px; display: inline-block;"><?php _e('AgeGate Title', 'agegate') ?></span>
-                    <input type="text" size="50" name="agegate_title" value="<?php echo get_option('agegate_title'); ?>">
-                </label>
+                <h2><?php _e('Genaral', 'agegate'); ?></h2>
+                
+                <div class="form-group">
+                    <label class="label" for="agegate_on_off_plugin">On/Off plugin</label>
+                    
+                    <label class="switch label_for">
+                        <input type="checkbox" id="agegate_on_off_plugin" value="1" name="agegate_on_off_plugin" <?=(get_option('agegate_on_off_plugin') ? 'checked' : '');?>>
+                        <span class="slider round"></span>                        
+                    </label>
+                </div>
             </div>
             
             <div>
-                <label>
-                    <span style="width: 100px; display: inline-block;"><?php _e('Start from', 'agegate') ?></span>
-                    <input 
-                        type="datetime-local" 
-                        size="50" 
-                        name="agegate_start_from" 
-                        value="<?php echo get_option('agegate_start_from'); ?>" 
-                        placeholder="2019-07-15 12:00:00"
-                        max="9999-12-31T23:59"
-                        />
-                    <small><?php _e('Default starts from 15.07.2019 12AM'); ?></small>
-                </label>
+                <h2><?php _e('Styling', 'agegate'); ?></h2>
+                
+                <?php include('agegate-styling.php'); ?>
+            <div>
+            
+            <div>
+                <h2><?php _e('Testing', 'agegate'); ?></h2>
+                <div class="form-group">
+                    <label class="label" for="agegate_test_mode"><?php _e('Test mode', 'agegate'); ?></label>
+                    
+                    <label class="switch label_for">
+                        <input type="checkbox" name="agegate_test_mode" id="agegate_test_mode" <?=(get_option('agegate_test_mode') ? 'checked' : '');?>>
+                        <span class="slider round"></span>                        
+                    </label>
+                </div>
+            
+                <div class="form-group">
+                    <label class="label" for="agegate_test_anyip"><?php _e('Any ip', 'agegate'); ?></label>
+                    
+                    <label class="switch label_for">
+                        <input type="checkbox" name="agegate_test_anyip" id="agegate_test_anyip" <?=(get_option('agegate_test_anyip') ? 'checked' : '');?>>
+                        <span class="slider round"></span>                        
+                    </label>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-6 col-md-7 order-md-1">
+                        <div class="mb-3">
+                            <label for="agegate_test_ip"><?php _e('Test ip', 'agegate') ?></label>
+                            <input type="text" class="form-control" id="agegate_test_ip" maxlength="300" name="agegate_test_ip" value="<?php echo get_option('agegate_custom_text'); ?>">
+                            <small><?php _e('Current ip:', 'agegate'); ?> <?php echo $ip; ?></small>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div>
-                <?php
-                $image_id = get_option( 'agegate_site_logo' );
-                if( intval( $image_id ) > 0 ) {
-                    // Change with the image size you want to use
-                    $image = wp_get_attachment_image( $image_id, 'thumbnail', false, array( 'id' => 'agegate-preview-image' ) );
-                } else {
-                    // Some default image
-                    $image = '<img id="agegate-preview-image" src="https://via.placeholder.com/80x80" />';
-                }
-                echo $image; 
-                ?>
-                <input type="hidden" name="agegate_site_logo" id="agegate_image_id" value="<?php echo esc_attr( $image_id ); ?>" class="regular-text" />
-                <div>
-                    <input type='button' class="button" value="<?php esc_attr_e( 'Select site logo', 'agegate' ); ?>" id="agegate_media_manager"/>
+                <h2><?php _e('Advanced', 'agegate'); ?></h2>
+                <div class="row">
+                    <div class="col-lg-6 col-md-7 order-md-1">
+                        <div class="mb-3">
+                            <label for="agegate_test_ip"><?php _e('Start from', 'agegate') ?></label>
+                            <input type="text" class="form-control" id="datetimepicker" maxlength="50" name="agegate_start_from" value="<?php echo get_option('agegate_start_from'); ?>">
+                            <small><?php _e('Default starts from 15.07.2019 12AM', 'agegate'); ?></small>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -62,4 +77,35 @@
     </div>
 
 </div>
+
+<script>
+(function() {
+    
+    new TestMode();
+    
+    textChange();
+    
+    jQuery('#datetimepicker').datetimepicker({
+        format: 'Y-m-d H:i'
+    });
+    
+})();
+
+function TestMode() {
+    this.test_mode = jQuery('[name="agegate_test_mode"]');
+    this.test_anyip = jQuery('[name="agegate_test_anyip"]');
+    this.test_ip = jQuery('[name="agegate_test_ip"]');
+    
+    this.enableInputs = function() {
+        this.test_anyip.prop('disabled', !this.test_mode.is(':checked'));
+        this.test_ip.prop('disabled', !this.test_mode.is(':checked'));
+        
+        this.test_ip.prop('disabled', this.test_anyip.is(':checked'));
+    }
+    
+    this.test_mode.on('click', () => {this.enableInputs()});
+    this.test_anyip.on('click', () => {this.enableInputs()});
+    this.enableInputs();
+}
+</script>
 
