@@ -122,6 +122,8 @@ function AgeGateForm() {
     this.test_anyip = jQuery('[name="agegate_test_anyip"]');
     this.test_ip = jQuery('[name="agegate_test_ip"]');
     
+    this.remove_logo = jQuery('#agegate_remove_logo');
+    
     this.enableInputs = function() {
         this.test_anyip.prop('disabled', !this.test_mode.is(':checked'));
         this.test_ip.prop('disabled', !this.test_mode.is(':checked'));
@@ -131,6 +133,14 @@ function AgeGateForm() {
     
     this.test_mode.on('click', () => {this.enableInputs()});
     this.test_anyip.on('click', () => {this.enableInputs()});
+    this.remove_logo.on('click', () => {
+        jQuery('#agegate-preview-image')[0].src = 'https://via.placeholder.com/80x80';
+        jQuery('#agegate-preview-image')[0].srcset = '';
+        jQuery('#agegate_image_id').val('');
+        jQuery('#agegate_image_src').val('');
+        
+        textChange();
+    });
     this.enableInputs();
 }
 </script>

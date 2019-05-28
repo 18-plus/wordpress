@@ -24,6 +24,8 @@
                     <input type="hidden" id="agegate_image_src" value="<?php echo wp_get_attachment_image_url( $image_id, 'thumbnail'); ?>" />
                     <div>
                         <input type='button' class="button" value="<?php esc_attr_e( 'Select site logo', 'agegate' ); ?>" id="agegate_media_manager"/>
+                        <input type='button' class="button" value="<?php esc_attr_e( 'Remove logo', 'agegate' ); ?>" id="agegate_remove_logo"/>
+                        
                     </div>
                 </div>
             </div>
