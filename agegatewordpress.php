@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: 18+ AgeGate
+Plugin Name: 18+ Age Gateway
 Description: Integrate a UK compliant age verification tool to ensure your UK based visitors confirm they are aged 18+ in a secure and anonymous way.
 Author: 18+
-Version: 1.2.0
+Version: 1.2.1
 */
 
 namespace EighteenPlus\AgeGateWordpress;
@@ -75,7 +75,7 @@ class AgeGateWordpress
     
     public function ageGateMenu() 
     {
-        add_plugins_page('18+ AgeGate', '18+ AgeGate', 'manage_options', 'edit-agegate-options', array($this, 'ageGateOptionsEdit'));
+        add_plugins_page('18+ Age Gateway', '18+ Age Gateway', 'manage_options', 'edit-agegate-options', array($this, 'ageGateOptionsEdit'));
     }
     
     public function load_wp_media_files($page)

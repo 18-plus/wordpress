@@ -1,6 +1,6 @@
 <div class="wrap">
     <h1 class="wp-heading-inline">
-        <?php _e('AgeGate Options', 'agegate'); ?>
+        <?php _e('Age Gateway Options', 'agegate'); ?>
     </h1>
 	
     <hr class="wp-header-end">
