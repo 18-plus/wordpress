@@ -36,7 +36,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #7f8c8d;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -67,7 +67,7 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 input:disabled + .slider {
-    background-color: #cccccc;
+    background-color: #7f8c8d;
 }
 input:disabled + .slider:before {
     background-color: #dcdcdc;

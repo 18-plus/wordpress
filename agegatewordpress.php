@@ -56,12 +56,21 @@ class AgeGateWordpress
                 
                 $gate->setStartFrom(get_option('agegate_start_from'));
                 
-                $gate->setDesktopSessionLifetime(get_option('agegate_desktop_session_lifetime'));
-                $gate->setMobileSessionLifetime(get_option('agegate_mobile_session_lifetime'));
+                $gate->setDesktopSessionLifetime($this->toHours(get_option('agegate_desktop_session_lifetime')));
+                $gate->setMobileSessionLifetime($this->toHours(get_option('agegate_mobile_session_lifetime')));
                 
                 $gate->run();
             }
         }
+    }
+    
+    private function toHours($options)
+    {
+        if (empty($options)) {
+            return 24;
+        }
+        
+        return $options['d'] * 24 + $options['h'] + $options['m'] / 60;
     }
     
     public function ageGateAdminNotices()
@@ -93,6 +102,9 @@ class AgeGateWordpress
             wp_enqueue_script('bootstrap_colorpicker', plugins_url( '/js/bootstrap-colorpicker.js' , __FILE__ ), array('jquery', 'bootstrap'), '0.1');
             wp_enqueue_style('bootstrap_css', '//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
             wp_enqueue_style('bootstrap_colorpicker_css', plugins_url( '/css/bootstrap-colorpicker.css' , __FILE__ ));
+            
+            wp_enqueue_script('rangeslider', plugins_url( '/js/rangeSlider.js' , __FILE__ ), array('jquery'), '0.1');
+            wp_enqueue_style('rangeslider_css', plugins_url( '/css/rangeSlider.css' , __FILE__ ));
             
             wp_enqueue_style('agegatestyle', plugins_url( '/css/style.css' , __FILE__ ));
         }

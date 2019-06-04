@@ -78,17 +78,43 @@
                     
                     <div class="col-lg-6 col-md-6 order-md-1">
                         <div class="mb-3">
-                            <label for="agegate_desktop_session_lifetime"><?php _e('Desktop Session Lifetime', 'agegate') ?></label>
-                            <input type="number" class="form-control" min="1" max="24" id="agegate_desktop_session_lifetime" name="agegate_desktop_session_lifetime" value="<?php echo get_option('agegate_desktop_session_lifetime'); ?>">
-                            <small><?php _e('Default 24 hours', 'agegate'); ?></small>
+                            <label for="agegate_desktop_session_lifetime"><?php _e('Desktop Session Lifetime', 'agegate') ?> </label>
+                            
+                            <div>
+                                <input type="range" data-rangeSlider min="0" max="24" id="agegate_desktop_session_lifetime_d" name="agegate_desktop_session_lifetime[d]" value="<?php echo get_option('agegate_desktop_session_lifetime')['d']; ?>">
+                                <output></output> <?php _e('Days', 'agegate'); ?>
+                            </div>
+                            
+                            <div>
+                                <input type="range" data-rangeSlider min="1" max="24" id="agegate_desktop_session_lifetime_h" name="agegate_desktop_session_lifetime[h]" value="<?php echo get_option('agegate_desktop_session_lifetime')['h']; ?>">
+                                <output></output> <?php _e('Hours', 'agegate'); ?>
+                            </div>
+                            
+                            <div>
+                                <input type="range" data-rangeSlider min="0" max="60" id="agegate_desktop_session_lifetime_m" name="agegate_desktop_session_lifetime[m]" value="<?php echo get_option('agegate_desktop_session_lifetime')['m']; ?>">
+                                <output></output> <?php _e('Minutes', 'agegate'); ?>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="col-lg-6 col-md-6 order-md-1">
                         <div class="mb-3">
-                            <label for="agegate_mobile_session_lifetime"><?php _e('Mobile Session Lifetime', 'agegate') ?></label>
-                            <input type="number" class="form-control" min="1" max="240" id="agegate_mobile_session_lifetime" name="agegate_mobile_session_lifetime" value="<?php echo get_option('agegate_mobile_session_lifetime'); ?>">
-                            <small><?php _e('Default 24 hours', 'agegate'); ?></small>
+                            <label for="agegate_mobile_session_lifetime"><?php _e('Mobile Session Lifetime', 'agegate') ?> </label>
+                            
+                            <div>
+                                <input type="range" data-rangeSlider min="0" max="24" id="agegate_mobile_session_lifetime_d" name="agegate_mobile_session_lifetime[d]" value="<?php echo get_option('agegate_mobile_session_lifetime')['d']; ?>">
+                                <output></output> <?php _e('Days', 'agegate'); ?>
+                            </div>
+                            
+                            <div>
+                                <input type="range" data-rangeSlider min="1" max="24" id="agegate_mobile_session_lifetime_h" name="agegate_mobile_session_lifetime[h]" value="<?php echo get_option('agegate_mobile_session_lifetime')['h']; ?>">
+                                <output></output> <?php _e('Hours', 'agegate'); ?>
+                            </div>
+                            
+                            <div>
+                                <input type="range" data-rangeSlider min="1" max="60" id="agegate_mobile_session_lifetime_m" name="agegate_mobile_session_lifetime[m]" value="<?php echo get_option('agegate_mobile_session_lifetime')['m']; ?>">
+                                <output></output> <?php _e('Minutes', 'agegate'); ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,6 +130,8 @@
 
 <script>
 (function() {
+    
+    rangeSliderInit();
     
     new AgeGateForm();
     
@@ -142,6 +170,32 @@ function AgeGateForm() {
         textChange();
     });
     this.enableInputs();
+}
+
+function rangeSliderInit() {
+    var selector = '[data-rangeSlider]',
+        elements = document.querySelectorAll(selector);
+
+    // Example functionality to demonstrate a value feedback
+    function valueOutput(element) {
+        var value = element.value,
+            output = element.parentNode.getElementsByTagName('output')[0];
+        output.innerHTML = value;
+    }
+
+    for (var i = elements.length - 1; i >= 0; i--) {
+        valueOutput(elements[i]);
+    }
+
+    Array.prototype.slice.call(document.querySelectorAll('input[type="range"]')).forEach(function (el) {
+        el.addEventListener('input', function (e) {
+            valueOutput(e.target);
+        }, false);
+    });
+
+
+    // Basic rangeSlider initialization
+    rangeSlider.create(elements);
 }
 </script>
 
