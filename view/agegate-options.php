@@ -63,7 +63,7 @@
                     <div class="col-lg-6 col-md-7 order-md-1">
                         <div class="mb-3">
                             <label for="agegate_start_from"><?php _e('Start from', 'agegate') ?></label>
-                            <input type="text" class="form-control" id="datetimepicker" maxlength="50" name="agegate_start_from" value="<?php echo get_option('agegate_start_from'); ?>">
+                            <input type="text" class="form-control" id="datetimepicker" readonly maxlength="50" name="agegate_start_from" value="<?php echo get_option('agegate_start_from'); ?>">
                             <small><?php _e('Default starts from 15.07.2019 12AM', 'agegate'); ?></small>
                         </div>
                     </div>
@@ -80,19 +80,30 @@
                         <div class="mb-3">
                             <label for="agegate_desktop_session_lifetime"><?php _e('Desktop Session Lifetime', 'agegate') ?> </label>
                             
-                            <div>
-                                <input type="range" data-rangeSlider min="0" max="24" id="agegate_desktop_session_lifetime_d" name="agegate_desktop_session_lifetime[d]" value="<?php echo get_option('agegate_desktop_session_lifetime')['d']; ?>">
-                                <output></output> <?php _e('Days', 'agegate'); ?>
-                            </div>
-                            
-                            <div>
-                                <input type="range" data-rangeSlider min="1" max="24" id="agegate_desktop_session_lifetime_h" name="agegate_desktop_session_lifetime[h]" value="<?php echo get_option('agegate_desktop_session_lifetime')['h']; ?>">
-                                <output></output> <?php _e('Hours', 'agegate'); ?>
-                            </div>
-                            
-                            <div>
-                                <input type="range" data-rangeSlider min="0" max="60" id="agegate_desktop_session_lifetime_m" name="agegate_desktop_session_lifetime[m]" value="<?php echo get_option('agegate_desktop_session_lifetime')['m']; ?>">
-                                <output></output> <?php _e('Minutes', 'agegate'); ?>
+                            <div class="inputPicker">  
+                                <input readonly class="inputPickerResult form-control">
+                                <div class="inputPickerBody">
+                                    <div class="input-group">
+                                        <input type="button" value="-" class="button-minus">
+                                        <input type="number" id="agegate_desktop_session_lifetime_d" class="quantity-field" name="agegate_desktop_session_lifetime[d]" value="<?php echo get_option('agegate_desktop_session_lifetime')['d']; ?>">
+                                        <input type="button" value="+" class="button-plus">
+                                        <span><?php _e('Days', 'agegate'); ?></span>
+                                    </div>
+                                
+                                    <div class="input-group">
+                                      <input type="button" value="-" class="button-minus">
+                                      <input type="number" class="quantity-field" id="agegate_desktop_session_lifetime_h" name="agegate_desktop_session_lifetime[h]" value="<?php echo get_option('agegate_desktop_session_lifetime')['h']; ?>">
+                                      <input type="button" value="+" class="button-plus">
+                                      <?php _e('Hours', 'agegate'); ?>
+                                    </div>
+                                
+                                    <div class="input-group">
+                                      <input type="button" value="-" class="button-minus">
+                                      <input type="number" class="quantity-field" id="agegate_desktop_session_lifetime_m" name="agegate_desktop_session_lifetime[m]" value="<?php echo get_option('agegate_desktop_session_lifetime')['m']; ?>">
+                                      <input type="button" value="+" class="button-plus">
+                                      <?php _e('Minutes', 'agegate'); ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -100,20 +111,31 @@
                     <div class="col-lg-6 col-md-6 order-md-1">
                         <div class="mb-3">
                             <label for="agegate_mobile_session_lifetime"><?php _e('Mobile Session Lifetime', 'agegate') ?> </label>
-                            
-                            <div>
-                                <input type="range" data-rangeSlider min="0" max="24" id="agegate_mobile_session_lifetime_d" name="agegate_mobile_session_lifetime[d]" value="<?php echo get_option('agegate_mobile_session_lifetime')['d']; ?>">
-                                <output></output> <?php _e('Days', 'agegate'); ?>
-                            </div>
-                            
-                            <div>
-                                <input type="range" data-rangeSlider min="1" max="24" id="agegate_mobile_session_lifetime_h" name="agegate_mobile_session_lifetime[h]" value="<?php echo get_option('agegate_mobile_session_lifetime')['h']; ?>">
-                                <output></output> <?php _e('Hours', 'agegate'); ?>
-                            </div>
-                            
-                            <div>
-                                <input type="range" data-rangeSlider min="1" max="60" id="agegate_mobile_session_lifetime_m" name="agegate_mobile_session_lifetime[m]" value="<?php echo get_option('agegate_mobile_session_lifetime')['m']; ?>">
-                                <output></output> <?php _e('Minutes', 'agegate'); ?>
+                            <div class="inputPicker">  
+                                <input readonly class="inputPickerResult form-control">
+                                <div class="inputPickerBody">
+                                    <div class="input-group">
+                                        <input type="button" value="-" class="button-minus">
+                                        <input type="number" id="agegate_mobile_session_lifetime_d" class="quantity-field" name="agegate_mobile_session_lifetime[d]" value="<?php echo get_option('agegate_mobile_session_lifetime')['d']; ?>">
+                                        <input type="button" value="+" class="button-plus">
+                                        <span><?php _e('Days', 'agegate'); ?></span>
+                                    </div>
+                                    
+                                    <div class="input-group">
+                                      <input type="button" value="-" class="button-minus">
+                                      <input type="number" class="quantity-field" id="agegate_mobile_session_lifetime_h" name="agegate_mobile_session_lifetime[h]" value="<?php echo get_option('agegate_mobile_session_lifetime')['h']; ?>">
+                                      <input type="button" value="+" class="button-plus">
+                                      <?php _e('Hours', 'agegate'); ?>
+                                    </div>
+                                    
+                                    <div class="input-group">
+                                      <input type="button" value="-" class="button-minus">
+                                      <input type="number" class="quantity-field" id="agegate_mobile_session_lifetime_m" name="agegate_mobile_session_lifetime[m]" value="<?php echo get_option('agegate_mobile_session_lifetime')['m']; ?>">
+                                      <input type="button" value="+" class="button-plus">
+                                      <?php _e('Minutes', 'agegate'); ?>
+                                    </div>
+                                
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -131,7 +153,7 @@
 <script>
 (function() {
     
-    rangeSliderInit();
+    pickerInit();
     
     new AgeGateForm();
     
@@ -172,30 +194,67 @@ function AgeGateForm() {
     this.enableInputs();
 }
 
-function rangeSliderInit() {
-    var selector = '[data-rangeSlider]',
-        elements = document.querySelectorAll(selector);
+function pickerInit() {
+    calculateResult();
+    
+    function incrementValue(e) {
+      e.preventDefault();
+      
+      var parent = jQuery(e.target).closest('div');
+      var field = parent.find('input[type="number"]');
+      var currentVal = parseInt(field.val(), 10);
 
-    // Example functionality to demonstrate a value feedback
-    function valueOutput(element) {
-        var value = element.value,
-            output = element.parentNode.getElementsByTagName('output')[0];
-        output.innerHTML = value;
+      if (!isNaN(currentVal)) {
+        field.val(currentVal + 1);
+      } else {
+        field.val(0);
+      }
+      calculateResult();
     }
 
-    for (var i = elements.length - 1; i >= 0; i--) {
-        valueOutput(elements[i]);
+    function decrementValue(e) {
+      e.preventDefault();
+      
+      var parent = jQuery(e.target).closest('div');
+      var field = parent.find('input[type="number"]');
+      var currentVal = parseInt(field.val(), 10);
+
+      if (!isNaN(currentVal) && currentVal > 0) {
+        field.val(currentVal - 1);
+      } else {
+        field.val(0);
+      }
+      calculateResult();
+    }
+    
+    function calculateResult() {
+        jQuery('.inputPicker').each(function(){
+            var result = jQuery(this).find('.inputPickerResult');
+            var fields = jQuery(this).find('.quantity-field');
+            
+            var str = `${fields[0].value || 0} days ${fields[1].value || 0} hours ${fields[2].value || 0} minutes`;
+            
+            result.val(str);
+        })
     }
 
-    Array.prototype.slice.call(document.querySelectorAll('input[type="range"]')).forEach(function (el) {
-        el.addEventListener('input', function (e) {
-            valueOutput(e.target);
-        }, false);
+    jQuery('.input-group').on('click', '.button-plus', function(e) {
+      incrementValue(e);
     });
 
-
-    // Basic rangeSlider initialization
-    rangeSlider.create(elements);
+    jQuery('.input-group').on('click', '.button-minus', function(e) {
+      decrementValue(e);
+    });
+    
+    jQuery('.inputPickerResult').on('click', function(){
+        jQuery(this).closest('.inputPicker').find('.inputPickerBody').show();
+    });
+    jQuery(document).on('click', function(event){
+        if (!jQuery(event.target).parents('.inputPicker').length) {
+            calculateResult();
+            jQuery('.inputPickerBody').hide();
+        }
+    });
 }
 </script>
 

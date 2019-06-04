@@ -103,9 +103,6 @@ class AgeGateWordpress
             wp_enqueue_style('bootstrap_css', '//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
             wp_enqueue_style('bootstrap_colorpicker_css', plugins_url( '/css/bootstrap-colorpicker.css' , __FILE__ ));
             
-            wp_enqueue_script('rangeslider', plugins_url( '/js/rangeSlider.js' , __FILE__ ), array('jquery'), '0.1');
-            wp_enqueue_style('rangeslider_css', plugins_url( '/css/rangeSlider.css' , __FILE__ ));
-            
             wp_enqueue_style('agegatestyle', plugins_url( '/css/style.css' , __FILE__ ));
         }
     }
@@ -159,7 +156,9 @@ class AgeGateWordpress
         }
         
         $sessionLifeTime = ini_get("session.gc_maxlifetime") / 3600;
-        if ($sessionLifeTime < get_option('agegate_desktop_session_lifetime') || $sessionLifeTime < get_option('agegate_mobile_session_lifetime')) {
+        $desktop = $this->toHours(get_option('agegate_desktop_session_lifetime'));
+        $mobile = $this->toHours(get_option('agegate_mobile_session_lifetime'));
+        if ($sessionLifeTime < $desktop || $sessionLifeTime < $mobile) {
             $warning = true;
         } else {
             $warning = false;
