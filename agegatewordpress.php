@@ -66,7 +66,7 @@ class AgeGateWordpress
     
     private function toHours($options)
     {
-        if (empty($options)) {
+        if (empty($options) || !is_array($options)) {
             return 24;
         }
         
