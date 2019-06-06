@@ -21,6 +21,15 @@ class AgeGateWordpress
         
         add_action('admin_enqueue_scripts', array($this, 'load_wp_media_files'));
         add_action('wp_ajax_agegate_get_image', array($this,'agegate_get_image'));
+        
+        register_activation_hook( __FILE__, array( $this, 'install' ) );
+    }
+    
+    public function install()
+    {
+        delete_option('agegate_test_mode');
+        delete_option('agegate_test_anyip');
+        delete_option('agegate_test_ip');
     }
     
     public function run()
