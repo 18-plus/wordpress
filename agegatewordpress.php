@@ -3,7 +3,7 @@
 Plugin Name: 18+ Age Gateway
 Description: Integrate a UK compliant age verification tool to ensure your UK based visitors confirm they are aged 18+ in a secure and anonymous way.
 Author: 18+
-Version: 1.2.1
+Version: 1.2.2
 */
 
 namespace EighteenPlus\AgeGateWordpress;
@@ -32,6 +32,17 @@ class AgeGateWordpress
         delete_option('agegate_test_ip');
         delete_option('agegate_desktop_session_lifetime');
         delete_option('agegate_mobile_session_lifetime');
+        
+        add_option('agegate_desktop_session_lifetime', array(
+            'd' => 0,
+            'h' => 1,
+            'm' => 0,
+        ));
+        add_option('agegate_mobile_session_lifetime', array(
+            'd' => 0,
+            'h' => 2,
+            'm' => 0,
+        ));
     }
     
     public function run()
@@ -67,25 +78,14 @@ class AgeGateWordpress
                 
                 $gate->setStartFrom(get_option('agegate_start_from'));
                 
-                $desktop = $this->toHours(get_option('agegate_desktop_session_lifetime'));
-                $desktop = is_null($desktop) ? 1 : $desktop;
-                $mobile = $this->toHours(get_option('agegate_mobile_session_lifetime'));
-                $mobile = is_null($mobile) ? 2 : $mobile;
+                $desktop = Utils::toHours(get_option('agegate_desktop_session_lifetime'));
+                $mobile = Utils::toHours(get_option('agegate_mobile_session_lifetime'));
                 $gate->setDesktopSessionLifetime($desktop);
                 $gate->setMobileSessionLifetime($mobile);
                 
                 $gate->run();
             }
         }
-    }
-    
-    private function toHours($options)
-    {
-        if (empty($options) || !is_array($options)) {
-            return null;
-        }
-        
-        return $options['d'] * 24 + $options['h'] + $options['m'] / 60;
     }
     
     public function ageGateAdminNotices()
@@ -168,7 +168,7 @@ class AgeGateWordpress
             
             
             $desktopMaxTime = 2;
-            $desktopTime = $this->toHours($_POST['agegate_desktop_session_lifetime']);
+            $desktopTime = Utils::toHours($_POST['agegate_desktop_session_lifetime']);
             if ($desktopTime > $desktopMaxTime * 24) {
                 update_option('agegate_desktop_session_lifetime', array('d' => $desktopMaxTime, 'h' => 0, 'm' => 0));
             } else {                
@@ -176,7 +176,7 @@ class AgeGateWordpress
             }
             
             $mobileMaxTime = 7;
-            $mobileTime = $this->toHours($_POST['agegate_mobile_session_lifetime']);
+            $mobileTime = Utils::toHours($_POST['agegate_mobile_session_lifetime']);
             if ($mobileTime > $mobileMaxTime * 24) {
                 update_option('agegate_mobile_session_lifetime', array('d' => $mobileMaxTime, 'h' => 0, 'm' => 0));
             } else {                
@@ -184,11 +184,8 @@ class AgeGateWordpress
             }
         }
         
-        $desktop = $this->toHours(get_option('agegate_desktop_session_lifetime'));
-        $desktop = is_null($desktop) ? 1 : $desktop;
-        
-        $mobile = $this->toHours(get_option('agegate_mobile_session_lifetime'));
-        $mobile = is_null($mobile) ? 2 : $mobile;
+        $desktop = Utils::toHours(get_option('agegate_desktop_session_lifetime'));
+        $mobile = Utils::toHours(get_option('agegate_mobile_session_lifetime'));
         
         $sessionLifeTime = ini_get("session.gc_maxlifetime") / 3600;
         if ($sessionLifeTime < $desktop || $sessionLifeTime < $mobile) {

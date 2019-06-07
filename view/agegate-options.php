@@ -96,7 +96,7 @@
                                 
                                     <div class="input-group">
                                       <input type="button" value="-" class="button-minus">
-                                      <input type="number" class="quantity-field" id="agegate_desktop_session_lifetime_h" name="agegate_desktop_session_lifetime[h]" value="<?php echo isset(get_option('agegate_desktop_session_lifetime')['h']) ? get_option('agegate_desktop_session_lifetime')['h'] : '1'; ?>">
+                                      <input type="number" class="quantity-field" id="agegate_desktop_session_lifetime_h" name="agegate_desktop_session_lifetime[h]" value="<?php echo get_option('agegate_desktop_session_lifetime')['h']; ?>">
                                       <input type="button" value="+" class="button-plus">
                                       <?php _e('Hours', 'agegate'); ?>
                                     </div>
@@ -129,7 +129,7 @@
                                     
                                     <div class="input-group">
                                       <input type="button" value="-" class="button-minus">
-                                      <input type="number" class="quantity-field" id="agegate_mobile_session_lifetime_h" name="agegate_mobile_session_lifetime[h]" value="<?php echo isset(get_option('agegate_mobile_session_lifetime')['h']) ? get_option('agegate_mobile_session_lifetime')['h'] : '2'; ?>">
+                                      <input type="number" class="quantity-field" id="agegate_mobile_session_lifetime_h" name="agegate_mobile_session_lifetime[h]" value="<?php echo get_option('agegate_mobile_session_lifetime')['h']; ?>">
                                       <input type="button" value="+" class="button-plus">
                                       <?php _e('Hours', 'agegate'); ?>
                                     </div>
