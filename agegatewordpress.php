@@ -30,6 +30,8 @@ class AgeGateWordpress
         delete_option('agegate_test_mode');
         delete_option('agegate_test_anyip');
         delete_option('agegate_test_ip');
+        delete_option('agegate_desktop_session_lifetime');
+        delete_option('agegate_mobile_session_lifetime');
     }
     
     public function run()
@@ -65,8 +67,12 @@ class AgeGateWordpress
                 
                 $gate->setStartFrom(get_option('agegate_start_from'));
                 
-                $gate->setDesktopSessionLifetime($this->toHours(get_option('agegate_desktop_session_lifetime')));
-                $gate->setMobileSessionLifetime($this->toHours(get_option('agegate_mobile_session_lifetime')));
+                $desktop = $this->toHours(get_option('agegate_desktop_session_lifetime'));
+                $desktop = is_null($desktop) ? 1 : $desktop;
+                $mobile = $this->toHours(get_option('agegate_mobile_session_lifetime'));
+                $mobile = is_null($mobile) ? 2 : $mobile;
+                $gate->setDesktopSessionLifetime($desktop);
+                $gate->setMobileSessionLifetime($mobile);
                 
                 $gate->run();
             }
@@ -76,7 +82,7 @@ class AgeGateWordpress
     private function toHours($options)
     {
         if (empty($options) || !is_array($options)) {
-            return 24;
+            return null;
         }
         
         return $options['d'] * 24 + $options['h'] + $options['m'] / 60;
@@ -160,13 +166,31 @@ class AgeGateWordpress
             
             update_option('agegate_start_from', $_POST['agegate_start_from']);
             
-            update_option('agegate_desktop_session_lifetime', $_POST['agegate_desktop_session_lifetime']);
-            update_option('agegate_mobile_session_lifetime', $_POST['agegate_mobile_session_lifetime']);
+            
+            $desktopMaxTime = 2;
+            $desktopTime = $this->toHours($_POST['agegate_desktop_session_lifetime']);
+            if ($desktopTime > $desktopMaxTime * 24) {
+                update_option('agegate_desktop_session_lifetime', array('d' => $desktopMaxTime, 'h' => 0, 'm' => 0));
+            } else {                
+                update_option('agegate_desktop_session_lifetime', $_POST['agegate_desktop_session_lifetime']);
+            }
+            
+            $mobileMaxTime = 7;
+            $mobileTime = $this->toHours($_POST['agegate_mobile_session_lifetime']);
+            if ($mobileTime > $mobileMaxTime * 24) {
+                update_option('agegate_mobile_session_lifetime', array('d' => $mobileMaxTime, 'h' => 0, 'm' => 0));
+            } else {                
+                update_option('agegate_mobile_session_lifetime', $_POST['agegate_mobile_session_lifetime']);
+            }
         }
         
-        $sessionLifeTime = ini_get("session.gc_maxlifetime") / 3600;
         $desktop = $this->toHours(get_option('agegate_desktop_session_lifetime'));
+        $desktop = is_null($desktop) ? 1 : $desktop;
+        
         $mobile = $this->toHours(get_option('agegate_mobile_session_lifetime'));
+        $mobile = is_null($mobile) ? 2 : $mobile;
+        
+        $sessionLifeTime = ini_get("session.gc_maxlifetime") / 3600;
         if ($sessionLifeTime < $desktop || $sessionLifeTime < $mobile) {
             $warning = true;
         } else {

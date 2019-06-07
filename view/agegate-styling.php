@@ -50,7 +50,7 @@
                 <div class="custom-control custom-radio">
                     <input id="belowLogo" name="agegate_custom_text_location" type="radio" class="custom-control-input"
                            onchange="textChange()"  value="top" <?=(get_option('agegate_custom_text_location') == 'top' ? 'checked' : ''); ?>>
-                    <label class="custom-control-label" for="belowLogo"><?php _e('Below Age Gate', 'agegate'); ?></label>
+                    <label class="custom-control-label" for="belowLogo"><?php _e('Below Age Gateway', 'agegate'); ?></label>
                 </div>
                 <div class="custom-control custom-radio">
                     <input id="belowText" name="agegate_custom_text_location" type="radio" class="custom-control-input"
@@ -113,11 +113,6 @@
     var customTextTop = true;
     var showFromUK = true;
 
-    var testUrl = 'https://global.cdn.18plus.org';
-    var prod = 'https://uk.cdn.18plus.org';
-
-    //fa
-
     // initiate variables
 
     var logoUrl = baseLogoUrl;
@@ -125,23 +120,6 @@
     var customText = baseCustomText;
     var bgColor = baseBgColor;
     var textColor = baseTextColor;
-
-    let uuidv4 = function () {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
-    } // END let uuidv4
-
-    let sessionID = uuidv4()
-
-    const PostbackURL = "https://age.reallyme.net/api"
-    const AgeCheckURL = "https://deep.reallyme.net/agecheck"
-
-    let url = AgeCheckURL +
-        "?agid=" + encodeURI(sessionID) +
-        // "&url" + encodeURI() +
-        "&postback=" + encodeURI(PostbackURL)
 
     function textChange() {
 
@@ -202,42 +180,8 @@
 
     function updateVisual(logoUrl, siteName, customText, bgColor, textColor, showDigitalAct, customTextTop, showFromUK) {
 
-        // END link
-
-        let isMobile = {
-            Android: function () {
-                return navigator.userAgent.match(/Android/i);
-            },
-            BlackBerry: function () {
-                return navigator.userAgent.match(/BlackBerry/i);
-            },
-            iOS: function () {
-                return navigator.userAgent.match(/iPhone/i);
-            },
-            Opera: function () {
-                return navigator.userAgent.match(/Opera Mini/i);
-            },
-            Windows: function () {
-                return navigator.userAgent.match(/IEMobile/i);
-            },
-            any: function () {
-                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-            }
-        };
-
-        let qrSrc = "https://age.reallyme.net/qr?uuid=" + sessionID
-        let mobile = false
-        let scanText = 'Scan the QR from your camera or click here to verify your age.'
-        let qrContainer = '<a href="' + url + '"><img src="' + qrSrc + '"></a><br><br>'
         let topCustomText = ''
         let bottomCustomText = ''
-
-        if (isMobile.any()) {
-            mobile = true;
-            scanText = 'Click on 18+ logo or <a href="' + url + '">here</a> to verify'
-            qrContainer = ''
-        }
-
         let textDigitalAct = '';
 
         if (showDigitalAct) {
@@ -274,22 +218,22 @@
         }
 
         $("#mainDiv").html('<div style="background:' + bgColor + '; ' + 'height: 100%;background-repeat: no-repeat !important;background-position: center top !important;font-family: \'Cabin\', sans-serif !important;' +
-            '    background-image: url(https://global.cdn.agegateway.com/agegateway/img/agegate_bkgd_800.png) !important;height: fit-content;">' +
+            '    background-image: url(https://global.cdn.agegateway.com/agegateway/agegate_bkgd_1200.png) !important;height: fit-content;">' +
             '    <div style="margin-top: 30px;max-width: 1140px;width: 95%;margin-left: auto;margin-right: auto;text-align: center;color: ' + textColor + ';font-family: \'Cabin\', sans-serif !important;;padding-top: 30px;margin-bottom: 74px;">' +
             '        <div class="">' +
             '            <div style="max-width: 760px;margin-left: auto;margin-right: auto;display: block;width: 95%;">' +
             '                ' + htmlLogoUrl + htmlSiteName +
-            '                <h1 style="font-family: \'Cormorant Infant\', serif !important;font-weight: 500;font-size: 40px;margin-top: 6px;line-height: 1.2;margin-bottom: .5rem;">Age Gate</h1>' + topCustomText +
+            '                <h1 style="font-family: \'Cormorant Infant\', serif !important;font-weight: 500;font-size: 40px;margin-top: 6px;line-height: 1.2;margin-bottom: .5rem;"><img style="max-width: 100%;" src="https://global.cdn.agegateway.com/assets/img/agegateway_black.svg"></h1>' + topCustomText +
             '                <br><p style="font-weight:normal;line-height: 1.5;margin-top: 5px;font-family: \'Cabin\', sans-serif !important;">' + textFromUK + 'To proceed please verify your age.</p>' +
             '                <p style="font-weight:normal;line-height: 1.5;">' + textDigitalAct + '</p>' + bottomCustomText +
             '            </div>' +
             '        </div><br>' +
             '        <div class="mainDiv" style="background-color: white;width: 330px;height: 400px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);display: flex;padding-right: 0px;margin-left: auto;margin-right: auto;">\n' +
             '                    <div class="childDiv" style="display: inline-block;height: 100%;width: 100%;padding-top: 55px;">\n' +
-            '                        <a href="https://deep.reallyme.net/agecheck?agid=bf36c0df-e674-4ebd-a54e-5c3fe33ae54b&amp;postback=https://age.reallyme.net/api&amp;agent=chrome&amp;deep=true" style="float: none !important;position: unset !important;visibility: visible !important;margin-bottom: 0px !important;margin-top: 0px !important;padding: 0px !important;text-align: center !important;z-index: 9999 !important;\n' +
+            '                        <a href="#" style="float: none !important;position: unset !important;visibility: visible !important;margin-bottom: 0px !important;margin-top: 0px !important;padding: 0px !important;text-align: center !important;z-index: 9999 !important;\n' +
             '    background-image: none !important;opacity: 1 !important;margin-left: auto !important;margin-right: auto !important;display: block !important;width: 100px !important;min-width: 100px !important;max-width: 100px !important;min-height: 100px !important;\n' +
             '    height: 100px !important;max-height: 100px !important;">\n' +
-            '                            <img src="https://global.cdn.agegateway.com/agegateway/img/18plus_icon_small.png" style="float: none !important;position: unset !important;visibility: visible !important;margin-bottom: 0px !important;margin-top: 0px !important;padding: 0px !important;text-align: center !important;z-index: 9999 !important;\n' +
+            '                            <img src="<?php echo plugin_dir_url(__FILE__);?>emblem.png" style="float: none !important;position: unset !important;visibility: visible !important;margin-bottom: 0px !important;margin-top: 0px !important;padding: 0px !important;text-align: center !important;z-index: 9999 !important;\n' +
             '    background-image: none !important;opacity: 1 !important;margin-left: auto !important;margin-right: auto !important;display: block !important;width: 100px !important;min-width: 100px !important;max-width: 100px !important;min-height: 100px !important;\n' +
             '    height: 100px !important;max-height: 100px !important;"></a>\n' +
             '                        <p style="min-height: unset !important;max-height: unset !important;background-color: transparent !important;padding: 0px !important;    max-width: 300px !important;min-width: unset !important;width: 100% !important;\n' +
@@ -301,10 +245,10 @@
             '                        <div style="border: none !important;display:block !important;visibility: visible !important;opacity: 1 !important;background-image: none !important;padding: 0px !important;z-index: 99999 !important;background-color: transparent !important;min-height: unset !important;max-height: unset !important;min-width: unset !important;left: 0px !important;top: 0px !important;margin-bottom: 20px !important;margin-top: 0px !important;width: 95% !important;margin-left: auto !important;margin-right: auto !important;text-align: center !important;color: #212529 !important;   font-family: \'Cabin\', sans-serif !important;height: initial !important;position: initial !important;float: none !important;max-width: 760px !important;">\n' +
             '                            <a style="float: none !important;position: unset !important;visibility: visible !important;margin-bottom: 0px !important;margin-top: 0px !important;padding: 0px !important;text-align: center !important;\n' +
             '                    z-index: 9999 !important;background-image: none !important;opacity: 1 !important;display: inline-block; margin-left: auto !important;margin-right: auto !important;width: 135px !important;height: 40px !important;\n' +
-            '                    min-width: 135px !important;max-width: 135px !important;max-height: 40px !important;min-height: 40px !important;margin-right: 0px !important;" href="https://www.apple.com/la/ios/app-store/"> <img style="float: none !important;position: unset !important;visibility: visible !important;margin-bottom: 0px !important;margin-top: 0px !important;padding: 0px !important;text-align: center !important;z-index: 9999 !important;background-image: none !important;opacity: 1 !important;display: block; margin-left: auto !important;margin-right: auto !important;width: 135px !important;height: 40px !important;min-width: 135px !important;max-width: 135px !important;max-height: 40px !important;min-height: 40px !important;" src="https://global.cdn.agegateway.com/agegateway/Download_on_the_App_Store_Badge.svg"></a>\n' +
+            '                    min-width: 135px !important;max-width: 135px !important;max-height: 40px !important;min-height: 40px !important;margin-right: 0px !important;" href="https://itunes.apple.com/gb/app/18/id1464599161?ls=1&mt=8"> <img style="float: none !important;position: unset !important;visibility: visible !important;margin-bottom: 0px !important;margin-top: 0px !important;padding: 0px !important;text-align: center !important;z-index: 9999 !important;background-image: none !important;opacity: 1 !important;display: block; margin-left: auto !important;margin-right: auto !important;width: 135px !important;height: 40px !important;min-width: 135px !important;max-width: 135px !important;max-height: 40px !important;min-height: 40px !important;" src="https://global.cdn.agegateway.com/agegateway/Download_on_the_App_Store_Badge.svg"></a>\n' +
             '                            <a style="float: none !important;position: unset !important;visibility: visible !important;margin-bottom: 0px !important;padding: 0px !important;text-align: center !important;\n' +
             '                    z-index: 9999 !important;background-image: none !important;opacity: 1 !important;display: block; margin-left: auto !important;margin-right: auto !important;width: 135px !important;height: 40px !important;\n' +
-            '                    min-width: 135px !important;max-width: 135px !important;max-height: 40px !important;min-height: 40px !important;" href="https://play.google.com/store"> <img style="float: none !important;position: unset !important;visibility: visible !important;margin-bottom: 0px !important;margin-top: 0px !important;padding: 0px !important;text-align: center !important;z-index: 9999 !important;background-image: none !important;opacity: 1 !important;display: inline-block; margin-left: auto !important;margin-right: auto !important;width: 135px !important;height: 40px !important;min-width: 135px !important;max-width: 135px !important;max-height: 40px !important;min-height: 40px !important;" src="https://global.cdn.agegateway.com/agegateway/get_it_on_google_play.svg"></a></div>\n' +
+            '                    min-width: 135px !important;max-width: 135px !important;max-height: 40px !important;min-height: 40px !important;" href="https://play.google.com/store/apps/details?id=org.plus18.android"> <img style="float: none !important;position: unset !important;visibility: visible !important;margin-bottom: 0px !important;margin-top: 0px !important;padding: 0px !important;text-align: center !important;z-index: 9999 !important;background-image: none !important;opacity: 1 !important;display: inline-block; margin-left: auto !important;margin-right: auto !important;width: 135px !important;height: 40px !important;min-width: 135px !important;max-width: 135px !important;max-height: 40px !important;min-height: 40px !important;" src="https://global.cdn.agegateway.com/agegateway/get_it_on_google_play.svg"></a></div>\n' +
             '                    </div>\n' +
             '                    \n' +
             '                </div>' +

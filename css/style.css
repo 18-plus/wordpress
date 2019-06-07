@@ -86,7 +86,7 @@ input:disabled + .slider:before {
     margin-bottom: 5px;
 }
 .label {
-    width: 100px;
+    width: 120px;
     display: inline-block;
 }
 .label_for {
