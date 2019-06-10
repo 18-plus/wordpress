@@ -1,4 +1,9 @@
 <div class="wrap">
+    <div>
+        <small>
+            The 18+ Age Gateway presents an age verification solution for UK based visitors to enable your website to comply with the Digital Economy Act 2017.   The gateway works in conjunction with the 18+ App, available on the App Store and Google Play Store.   Use of the 18+ Age Gateway is free.  However, use of the 18+ Age Gateway is subject to our <a href="https://www.agegateway.com/terms.html" target="_blank">Terms and Conditions</a>.  For more information or support, please visit <a href="https://www.agegateway.com/">https://www.agegateway.com/</a>.  (c) Copyright 2019 by 18 Plus Ltd.  All Rights Reserved.
+        </small>
+    </div>
     <h1 class="wp-heading-inline">
         <?php _e('18+ Age Gateway Settings', 'agegate'); ?>
     </h1>
@@ -152,10 +157,6 @@
             </p>
         </form>
     </div>
-    
-    <small>
-        The 18+ Age Gateway presents an age verification solution for UK based visitors to enable your website to comply with the Digital Economy Act 2017.   The gateway works in conjunction with the 18+ App, available on the App Store and Google Play Store.   Use of the 18+ Age Gateway is free.  However, use of the 18+ Age Gateway is subject to our <a href="https://www.agegateway.com/terms.html" target="_blank">Terms and Conditions</a>.  For more information or support, please visit <a href="https://www.agegateway.com/">https://www.agegateway.com/</a>.  (c) Copyright 2019 by 18 Plus Ltd.  All Rights Reserved.
-    </small>
 </div>
 
 <script>

@@ -3,7 +3,7 @@
 Plugin Name: 18+ Age Gateway
 Description: Integrate a UK compliant age verification tool to ensure your UK based visitors confirm they are aged 18+ in a secure and anonymous way.
 Author: 18+
-Version: 1.2.2
+Version: 1.2.3
 */
 
 namespace EighteenPlus\AgeGateWordpress;
