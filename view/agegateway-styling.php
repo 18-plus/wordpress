@@ -1,68 +1,68 @@
     <div class="row">
         <div class="col-lg-6 col-md-7 order-md-1">
             <div class="mb-3">
-                <label for="agegate_title"><?php _e('Title', 'agegate'); ?></label>
-                <input type="text" class="form-control" id="agegate_title" placeholder=""  onchange="textChange()"
-                       maxlength="300" name="agegate_title" value="<?php echo get_option('agegate_title'); ?>">
+                <label for="agegateway_title"><?php _e('Title', 'agegateway'); ?></label>
+                <input type="text" class="form-control" id="agegateway_title" placeholder=""  onchange="textChange()"
+                       maxlength="300" name="agegateway_title" value="<?php echo esc_html(get_option('agegateway_title')); ?>">
                 <div class="invalid-feedback">
                 </div>
             </div>
             <div class="mb-3">
                 <div>
                     <?php
-                    $image_id = get_option( 'agegate_site_logo' );
+                    $image_id = get_option( 'agegateway_site_logo' );
                     if( intval( $image_id ) > 0 ) {
                         // Change with the image size you want to use
-                        $image = wp_get_attachment_image( $image_id, 'thumbnail', false, array( 'id' => 'agegate-preview-image' ) );
+                        $image = wp_get_attachment_image( $image_id, 'thumbnail', false, array( 'id' => 'agegateway-preview-image' ) );
                     } else {
                         // Some default image
-                        $image = '<img id="agegate-preview-image" src="https://via.placeholder.com/80x80" />';
+                        $image = '<img id="agegateway-preview-image" src="'.plugins_url('../img/placeholder.png', __FILE__).'" />';
                     }
                     echo $image; 
                     ?>
-                    <input type="hidden" name="agegate_site_logo" id="agegate_image_id" value="<?php echo esc_attr( $image_id ); ?>" />
-                    <input type="hidden" id="agegate_image_src" value="<?php echo wp_get_attachment_image_url( $image_id, 'thumbnail'); ?>" />
+                    <input type="hidden" name="agegateway_site_logo" id="agegateway_image_id" value="<?php echo esc_attr( $image_id ); ?>" />
+                    <input type="hidden" id="agegateway_image_src" value="<?php echo wp_get_attachment_image_url( $image_id, 'thumbnail'); ?>" />
                     <div>
-                        <input type='button' class="button" value="<?php esc_attr_e( 'Select site logo', 'agegate' ); ?>" id="agegate_media_manager"/>
-                        <input type='button' class="button" value="<?php esc_attr_e( 'Remove logo', 'agegate' ); ?>" id="agegate_remove_logo"/>
+                        <input type='button' class="button" value="<?php esc_attr_e( 'Select site logo', 'agegateway' ); ?>" id="agegateway_media_manager"/>
+                        <input type='button' class="button" value="<?php esc_attr_e( 'Remove logo', 'agegateway' ); ?>" id="agegateway_remove_logo"/>
                         
                     </div>
                 </div>
             </div>
             <div class="mb-3">
-                <label for="address"><?php _e('Site Name', 'agegate'); ?></label>
+                <label for="address"><?php _e('Site Name', 'agegateway'); ?></label>
                 <input type="text" class="form-control" id="site_name" placeholder="" 
-                       onchange="textChange()" maxlength="200" name="agegate_site_name" value="<?php echo get_option('agegate_site_name'); ?>">
+                       onchange="textChange()" maxlength="200" name="agegateway_site_name" value="<?php echo esc_html(get_option('agegateway_site_name')); ?>">
                 <div class="invalid-feedback">
 
                 </div>
             </div>
             <div class="mb-3">
-                <label for="address"><?php _e('Custom Text', 'agegate'); ?></label>
+                <label for="address"><?php _e('Custom Text', 'agegateway'); ?></label>
                 <input type="text" class="form-control" id="custom_text" placeholder="" 
-                       onchange="textChange()" maxlength="300" name="agegate_custom_text" value="<?php echo get_option('agegate_custom_text'); ?>">
+                       onchange="textChange()" maxlength="300" name="agegateway_custom_text" value="<?php echo esc_html(get_option('agegateway_custom_text')); ?>">
                 <div class="invalid-feedback">
 
                 </div>
             </div>
             <div class="d-block my-3">
-                <label style="margin-left: 0px; padding-left: 0px;" class="col-lg-12"><?php _e('Custom Text Location', 'agegate'); ?></label>
+                <label style="margin-left: 0px; padding-left: 0px;" class="col-lg-12"><?php _e('Custom Text Location', 'agegateway'); ?></label>
                 <div class="custom-control custom-radio">
-                    <input id="belowLogo" name="agegate_custom_text_location" type="radio" class="custom-control-input"
-                           onchange="textChange()"  value="top" <?=(get_option('agegate_custom_text_location') == 'top' ? 'checked' : ''); ?>>
-                    <label class="custom-control-label" for="belowLogo"><?php _e('Below Age Gateway', 'agegate'); ?></label>
+                    <input id="belowLogo" name="agegateway_custom_text_location" type="radio" class="custom-control-input"
+                           onchange="textChange()"  value="top" <?=(get_option('agegateway_custom_text_location') == 'top' ? 'checked' : ''); ?>>
+                    <label class="custom-control-label" for="belowLogo"><?php _e('Below Age Gateway', 'agegateway'); ?></label>
                 </div>
                 <div class="custom-control custom-radio">
-                    <input id="belowText" name="agegate_custom_text_location" type="radio" class="custom-control-input"
-                           onchange="textChange()"  value="bottom" <?=(get_option('agegate_custom_text_location') == 'bottom' ? 'checked' : ''); ?>>
-                    <label class="custom-control-label" for="belowText"><?php _e('Above 18+ Logo', 'agegate'); ?></label>
+                    <input id="belowText" name="agegateway_custom_text_location" type="radio" class="custom-control-input"
+                           onchange="textChange()"  value="bottom" <?=(get_option('agegateway_custom_text_location') == 'bottom' ? 'checked' : ''); ?>>
+                    <label class="custom-control-label" for="belowText"><?php _e('Above 18+ Logo', 'agegateway'); ?></label>
                 </div>
             </div>
             <div id="bgColor" class="input-group" style="margin-bottom: 1rem!important;">
                 <label style="margin-left: 0px; padding-left: 0px;" class="col-lg-12" for="address"><?php _e('Background
-                    Color', 'agegate'); ?></label>
+                    Color', 'agegateway'); ?></label>
                 <input type="text" class="form-control" id="bgColorInput" placeholder="" 
-                       onchange="textChange()" maxlength="200" name="agegate_background_color" value="<?php echo get_option('agegate_background_color'); ?>">
+                       onchange="textChange()" maxlength="200" name="agegateway_background_color" value="<?php echo get_option('agegateway_background_color'); ?>">
                 <span class="input-group-append">
                         <span class="input-group-text colorpicker-input-addon"><i></i></span>
                     </span>
@@ -71,9 +71,9 @@
                 </div>
             </div>
             <div id="textColor" class="input-group" style="margin-bottom: 1rem!important;">
-                <label style="margin-left: 0px; padding-left: 0px;" class="col-lg-12" for="address"><?php _e('Text Color', 'agegate'); ?></label>
+                <label style="margin-left: 0px; padding-left: 0px;" class="col-lg-12" for="address"><?php _e('Text Color', 'agegateway'); ?></label>
                 <input type="text" class="form-control" id="textColorInput" placeholder="" 
-                       onchange="textChange()" maxlength="200" name="agegate_text_color" value="<?php echo get_option('agegate_text_color'); ?>">
+                       onchange="textChange()" maxlength="200" name="agegateway_text_color" value="<?php echo get_option('agegateway_text_color'); ?>">
                 <span class="input-group-append">
                         <span class="input-group-text colorpicker-input-addon"><i></i></span>
                     </span>
@@ -82,12 +82,12 @@
                 </div>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="showDigital" onchange="textChange()" name="agegate_remove_reference" <?=(get_option('agegate_remove_reference') ? 'checked' : ''); ?>>
-                <label class="custom-control-label" for="showDigital"><?php _e('Remove reference to Digital Economy Act', 'agegate'); ?></label>
+                <input type="checkbox" class="custom-control-input" id="showDigital" onchange="textChange()" name="agegateway_remove_reference" <?=(get_option('agegateway_remove_reference') ? 'checked' : ''); ?>>
+                <label class="custom-control-label" for="showDigital"><?php _e('Remove reference to Digital Economy Act', 'agegateway'); ?></label>
             </div>
             <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="fromUK" onchange="textChange()" name="agegate_remove_visiting" <?=(get_option('agegate_remove_visiting') ? 'checked' : ''); ?>>
-                <label class="custom-control-label" for="fromUK"><?php _e('Remove \'you are visiting from UK\' text', 'agegate'); ?></label>
+                <input type="checkbox" class="custom-control-input" id="fromUK" onchange="textChange()" name="agegateway_remove_visiting" <?=(get_option('agegateway_remove_visiting') ? 'checked' : ''); ?>>
+                <label class="custom-control-label" for="fromUK"><?php _e('Remove \'you are visiting from UK\' text', 'agegateway'); ?></label>
             </div>
             <hr class="mb-4">
         </div>
@@ -123,8 +123,9 @@
 
     function textChange() {
 
-        if ($('#agegate_image_src').val()) {
-            logoUrl = $('#agegate_image_src').val();
+    console.log($('#agegateway_image_src').val());
+        if ($('#agegateway_image_src').val()) {
+            logoUrl = $('#agegateway_image_src').val();
         }
         else {
             var logoUrl = baseLogoUrl;

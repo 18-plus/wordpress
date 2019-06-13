@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-    jQuery('input#agegate_media_manager').click(function(e) {
+    jQuery('input#agegateway_media_manager').click(function(e) {
         e.preventDefault();
         var image_frame;
         if (image_frame) {
@@ -24,14 +24,14 @@ jQuery(document).ready(function($) {
                 my_index++;
             });
             var ids = gallery_ids.join(",");
-            jQuery('input#agegate_image_id').val(ids);
+            jQuery('input#agegateway_image_id').val(ids);
             Refresh_Image(ids);
         });
         image_frame.on('open', function() {
             // On open, get the id from the hidden input
             // and select the appropiate images in the media manager
             var selection = image_frame.state().get('selection');
-            var ids = jQuery('input#agegate_image_id').val().split(',');
+            var ids = jQuery('input#agegateway_image_id').val().split(',');
             ids.forEach(function(id) {
                 var attachment = wp.media.attachment(id);
                 attachment.fetch();
@@ -44,13 +44,13 @@ jQuery(document).ready(function($) {
 // Ajax request to refresh the image preview
 function Refresh_Image(the_id) {
     var data = {
-        action: 'agegate_get_image',
+        action: 'agegateway_get_image',
         id: the_id
     };
     jQuery.get(ajaxurl, data, function(response) {
         if (response.success === true) {
-            jQuery('#agegate-preview-image').replaceWith(response.data.image);
-            jQuery('#agegate_image_src').val(response.data.image_url);
+            jQuery('#agegateway-preview-image').replaceWith(response.data.image);
+            jQuery('#agegateway_image_src').val(response.data.image_url);
             if (typeof textChange != 'undefined') {                
                 textChange();
             }

@@ -5,74 +5,74 @@
         </small>
     </div>
     <h1 class="wp-heading-inline">
-        <?php _e('18+ Age Gateway Settings', 'agegate'); ?>
+        <?php _e('18+ Age Gateway Settings', 'agegateway'); ?>
     </h1>
 	
     <hr class="wp-header-end">
     
     <div class="content">
-        <form method="post" id="agegateform">
+        <form method="post" id="agegatewayform">
             <div>
-                <h2><?php _e('General', 'agegate'); ?></h2>
+                <h2><?php _e('General', 'agegateway'); ?></h2>
                 
                 <div class="form-group">
-                    <label class="label" for="agegate_on_off_plugin"><?php _e('18+ Age Gateway On/Off', 'agegate'); ?></label>
+                    <label class="label" for="agegateway_on_off_plugin"><?php _e('18+ Age Gateway On/Off', 'agegateway'); ?></label>
                     
                     <label class="switch label_for">
-                        <input type="checkbox" id="agegate_on_off_plugin" value="1" name="agegate_on_off_plugin" <?=(get_option('agegate_on_off_plugin') ? 'checked' : '');?>>
+                        <input type="checkbox" id="agegateway_on_off_plugin" value="1" name="agegateway_on_off_plugin" <?=(get_option('agegateway_on_off_plugin') ? 'checked' : '');?>>
                         <span class="slider round"></span>                        
                     </label>
                 </div>
             </div>
             
             <div>
-                <h2><?php _e('Styling', 'agegate'); ?></h2>
+                <h2><?php _e('Styling', 'agegateway'); ?></h2>
                 
-                <?php include('agegate-styling.php'); ?>
+                <?php include('agegateway-styling.php'); ?>
             </div>
             
             <div>
-                <h2><?php _e('Testing', 'agegate'); ?></h2>
+                <h2><?php _e('Testing', 'agegateway'); ?></h2>
                 <div class="form-group">
-                    <label class="label" for="agegate_test_mode"><?php _e('Testing mode', 'agegate'); ?></label>
+                    <label class="label" for="agegateway_test_mode"><?php _e('Testing mode', 'agegateway'); ?></label>
                     
                     <label class="switch label_for">
-                        <input type="checkbox" name="agegate_test_mode" id="agegate_test_mode" <?=(get_option('agegate_test_mode') ? 'checked' : '');?>>
+                        <input type="checkbox" name="agegateway_test_mode" id="agegateway_test_mode" <?=(get_option('agegateway_test_mode') ? 'checked' : '');?>>
                         <span class="slider round"></span>                        
                     </label>
-                    <div><small><?php _e('Turning Testing Mode on will override the start date setting and activate the Age Gateway immediately', 'agegate'); ?></small></div>
+                    <div><small><?php _e('Turning Testing Mode on will override the start date setting and activate the Age Gateway immediately', 'agegateway'); ?></small></div>
                 </div>
             
                 <div class="form-group">
-                    <label class="label" for="agegate_test_anyip"><?php _e('Any IP Address', 'agegate'); ?></label>
+                    <label class="label" for="agegateway_test_anyip"><?php _e('Any IP Address', 'agegateway'); ?></label>
                     
                     <label class="switch label_for">
-                        <input type="checkbox" name="agegate_test_anyip" id="agegate_test_anyip" <?=(get_option('agegate_test_anyip') ? 'checked' : '');?>>
+                        <input type="checkbox" name="agegateway_test_anyip" id="agegateway_test_anyip" <?=(get_option('agegateway_test_anyip') ? 'checked' : '');?>>
                         <span class="slider round"></span>                        
                     </label>
-                    <div><small><?php _e('Turning this on will show the Age Gateway in Testing Mode for all IP addresses accessing the website', 'agegate'); ?></small></div>
+                    <div><small><?php _e('Turning this on will show the Age Gateway in Testing Mode for all IP addresses accessing the website', 'agegateway'); ?></small></div>
                 </div>
                 
                 <div class="row">
                     <div class="col-lg-6 col-md-7 order-md-1">
                         <div class="mb-3">
-                            <label for="agegate_test_ip"><?php _e('Test IP Address', 'agegate') ?></label>
-                            <input type="text" class="form-control" id="agegate_test_ip" maxlength="300" name="agegate_test_ip" value="<?php echo get_option('agegate_custom_text'); ?>">
-                            <small><?php _e('Current IP:', 'agegate'); ?> <?php echo $ip; ?></small>
-                            <div><small><?php _e('Enter the IP address from which you want to test the Age Gateway in testing Mode. The Age Gateway will be shown only on those IP address. Note: by default, the Age Gateway when activated will only show to UK based IP addresses. Therefore, specifying a non-UK IP address here is only way to see Age Gateway from a non-UK based IP address.', 'agegate'); ?></small></div>
+                            <label for="agegateway_test_ip"><?php _e('Test IP Address', 'agegateway') ?></label>
+                            <input type="text" class="form-control" id="agegateway_test_ip" maxlength="300" name="agegateway_test_ip" value="<?php echo get_option('agegateway_test_ip'); ?>">
+                            <small><?php _e('Current IP:', 'agegateway'); ?> <?php echo $ip; ?></small>
+                            <div><small><?php _e('Enter the IP address from which you want to test the Age Gateway in testing Mode. The Age Gateway will be shown only on those IP address. Note: by default, the Age Gateway when activated will only show to UK based IP addresses. Therefore, specifying a non-UK IP address here is only way to see Age Gateway from a non-UK based IP address.', 'agegateway'); ?></small></div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div>
-                <h2><?php _e('Advanced Settings', 'agegate'); ?></h2>
+                <h2><?php _e('Advanced Settings', 'agegateway'); ?></h2>
                 <div class="row">
                     <div class="col-lg-6 col-md-7 order-md-1">
                         <div class="mb-3">
-                            <label for="agegate_start_from"><?php _e('Start from', 'agegate') ?></label>
-                            <input type="text" class="form-control" id="datetimepicker" readonly maxlength="50" name="agegate_start_from" value="<?php echo get_option('agegate_start_from'); ?>">
-                            <small><?php _e('When activated, the Age Gateway will be active for UK based IP address starting at Midnight on 15 July 2019. You can change the starting date here but remember the law requires age verification from 15 July 2019.', 'agegate'); ?></small>
+                            <label for="agegateway_start_from"><?php _e('Start from', 'agegateway') ?></label>
+                            <input type="text" class="form-control" id="datetimepicker" readonly maxlength="50" name="agegateway_start_from" value="<?php echo get_option('agegateway_start_from'); ?>">
+                            <small><?php _e('When activated, the Age Gateway will be active for UK based IP address starting at Midnight on 15 July 2019. You can change the starting date here but remember the law requires age verification from 15 July 2019.', 'agegateway'); ?></small>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     
                     <div class="col-lg-6 col-md-6 order-md-1">
                         <div class="mb-3">
-                            <label for="agegate_desktop_session_lifetime"><?php _e('Desktop Session Lifetime', 'agegate') ?> </label>
+                            <label for="agegateway_desktop_session_lifetime"><?php _e('Desktop Session Lifetime', 'agegateway') ?> </label>
                             
                             <div class="inputPicker">  
                                 <input readonly class="inputPickerResult form-control">
@@ -94,56 +94,56 @@
                                     <small>Max value: 2 days</small>
                                     <div class="input-group">
                                         <input type="button" value="-" class="button-minus">
-                                        <input type="number" id="agegate_desktop_session_lifetime_d" class="quantity-field" name="agegate_desktop_session_lifetime[d]" value="<?php echo get_option('agegate_desktop_session_lifetime')['d']; ?>">
+                                        <input type="number" id="agegateway_desktop_session_lifetime_d" class="quantity-field" name="agegateway_desktop_session_lifetime[d]" value="<?php echo get_option('agegateway_desktop_session_lifetime')['d']; ?>">
                                         <input type="button" value="+" class="button-plus">
-                                        <span><?php _e('Days', 'agegate'); ?></span>
+                                        <span><?php _e('Days', 'agegateway'); ?></span>
                                     </div>
                                 
                                     <div class="input-group">
                                       <input type="button" value="-" class="button-minus">
-                                      <input type="number" class="quantity-field" id="agegate_desktop_session_lifetime_h" name="agegate_desktop_session_lifetime[h]" value="<?php echo get_option('agegate_desktop_session_lifetime')['h']; ?>">
+                                      <input type="number" class="quantity-field" id="agegateway_desktop_session_lifetime_h" name="agegateway_desktop_session_lifetime[h]" value="<?php echo get_option('agegateway_desktop_session_lifetime')['h']; ?>">
                                       <input type="button" value="+" class="button-plus">
-                                      <?php _e('Hours', 'agegate'); ?>
+                                      <?php _e('Hours', 'agegateway'); ?>
                                     </div>
                                 
                                     <div class="input-group">
                                       <input type="button" value="-" class="button-minus">
-                                      <input type="number" class="quantity-field" id="agegate_desktop_session_lifetime_m" name="agegate_desktop_session_lifetime[m]" value="<?php echo get_option('agegate_desktop_session_lifetime')['m']; ?>">
+                                      <input type="number" class="quantity-field" id="agegateway_desktop_session_lifetime_m" name="agegateway_desktop_session_lifetime[m]" value="<?php echo get_option('agegateway_desktop_session_lifetime')['m']; ?>">
                                       <input type="button" value="+" class="button-plus">
-                                      <?php _e('Minutes', 'agegate'); ?>
+                                      <?php _e('Minutes', 'agegateway'); ?>
                                     </div>
                                 </div>
                             </div>
-                            <small><?php _e('The Age Gateway will trigger once per session for eah visitor. You can change the lifetime of the session. By default, the session lifetime is 1 hour for desktop and 2 hours for mobile.', 'agegate'); ?></small>
+                            <small><?php _e('The Age Gateway will trigger once per session for eah visitor. You can change the lifetime of the session. By default, the session lifetime is 1 hour for desktop and 2 hours for mobile.', 'agegateway'); ?></small>
                         </div>
                     </div>
                     
                     <div class="col-lg-6 col-md-6 order-md-1">
                         <div class="mb-3">
-                            <label for="agegate_mobile_session_lifetime"><?php _e('Mobile Session Lifetime', 'agegate') ?> </label>
+                            <label for="agegateway_mobile_session_lifetime"><?php _e('Mobile Session Lifetime', 'agegateway') ?> </label>
                             <div class="inputPicker">  
                                 <input readonly class="inputPickerResult form-control">
                                 <div class="inputPickerBody">
                                     <small>Max value: 7 days</small>
                                     <div class="input-group">
                                         <input type="button" value="-" class="button-minus">
-                                        <input type="number" id="agegate_mobile_session_lifetime_d" class="quantity-field" name="agegate_mobile_session_lifetime[d]" value="<?php echo get_option('agegate_mobile_session_lifetime')['d']; ?>">
+                                        <input type="number" id="agegateway_mobile_session_lifetime_d" class="quantity-field" name="agegateway_mobile_session_lifetime[d]" value="<?php echo get_option('agegateway_mobile_session_lifetime')['d']; ?>">
                                         <input type="button" value="+" class="button-plus">
-                                        <span><?php _e('Days', 'agegate'); ?></span>
+                                        <span><?php _e('Days', 'agegateway'); ?></span>
                                     </div>
                                     
                                     <div class="input-group">
                                       <input type="button" value="-" class="button-minus">
-                                      <input type="number" class="quantity-field" id="agegate_mobile_session_lifetime_h" name="agegate_mobile_session_lifetime[h]" value="<?php echo get_option('agegate_mobile_session_lifetime')['h']; ?>">
+                                      <input type="number" class="quantity-field" id="agegateway_mobile_session_lifetime_h" name="agegateway_mobile_session_lifetime[h]" value="<?php echo get_option('agegateway_mobile_session_lifetime')['h']; ?>">
                                       <input type="button" value="+" class="button-plus">
-                                      <?php _e('Hours', 'agegate'); ?>
+                                      <?php _e('Hours', 'agegateway'); ?>
                                     </div>
                                     
                                     <div class="input-group">
                                       <input type="button" value="-" class="button-minus">
-                                      <input type="number" class="quantity-field" id="agegate_mobile_session_lifetime_m" name="agegate_mobile_session_lifetime[m]" value="<?php echo get_option('agegate_mobile_session_lifetime')['m']; ?>">
+                                      <input type="number" class="quantity-field" id="agegateway_mobile_session_lifetime_m" name="agegateway_mobile_session_lifetime[m]" value="<?php echo get_option('agegateway_mobile_session_lifetime')['m']; ?>">
                                       <input type="button" value="+" class="button-plus">
-                                      <?php _e('Minutes', 'agegate'); ?>
+                                      <?php _e('Minutes', 'agegateway'); ?>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
             </div>
             
             <p class="submit">
-                <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save changes', 'agegate'); ?>">
+                <input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Save changes', 'agegateway'); ?>">
             </p>
         </form>
     </div>
@@ -164,7 +164,7 @@
     
     pickerInit();
     
-    new AgeGateForm();
+    new AgeGatewayForm();
     
     textChange();
     
@@ -174,14 +174,14 @@
     
 })();
 
-function AgeGateForm() {
-    this.form = jQuery('#agegateform');
+function AgeGatewayForm() {
+    this.form = jQuery('#agegatewayform');
     
-    this.test_mode = jQuery('[name="agegate_test_mode"]');
-    this.test_anyip = jQuery('[name="agegate_test_anyip"]');
-    this.test_ip = jQuery('[name="agegate_test_ip"]');
+    this.test_mode = jQuery('[name="agegateway_test_mode"]');
+    this.test_anyip = jQuery('[name="agegateway_test_anyip"]');
+    this.test_ip = jQuery('[name="agegateway_test_ip"]');
     
-    this.remove_logo = jQuery('#agegate_remove_logo');
+    this.remove_logo = jQuery('#agegateway_remove_logo');
     
     this.enableInputs = function() {
         this.test_anyip.prop('disabled', !this.test_mode.is(':checked'));
@@ -193,10 +193,10 @@ function AgeGateForm() {
     this.test_mode.on('click', () => {this.enableInputs()});
     this.test_anyip.on('click', () => {this.enableInputs()});
     this.remove_logo.on('click', () => {
-        jQuery('#agegate-preview-image')[0].src = 'https://via.placeholder.com/80x80';
-        jQuery('#agegate-preview-image')[0].srcset = '';
-        jQuery('#agegate_image_id').val('');
-        jQuery('#agegate_image_src').val('');
+        jQuery('#agegateway-preview-image')[0].src = '<?=plugins_url('../img/placeholder.png', __FILE__);?>';
+        jQuery('#agegateway-preview-image')[0].srcset = '';
+        jQuery('#agegateway_image_id').val('');
+        jQuery('#agegateway_image_src').val('');
         
         textChange();
     });
