@@ -29,3 +29,8 @@ Visit https://www.agegateway.com/ and https://www.18plus.org/ for more informati
 = 1.0 =
 Initial release.
 Collapse
+
+== Screenshots ==
+1. Age Gateway settings page
+2. Additional options for testing purposes
+3. Age Gateway home page
