@@ -38,6 +38,9 @@ class AgeGatewayWordpress
             'h' => 2,
             'm' => 0,
         ));
+        
+        add_option('agegateway_show_agegateway_logo', true);
+        add_option('agegateway_show_background_image', true);
     }
     
     public function deactivate()
@@ -47,6 +50,8 @@ class AgeGatewayWordpress
         delete_option('agegateway_test_ip');
         delete_option('agegateway_desktop_session_lifetime');
         delete_option('agegateway_mobile_session_lifetime');
+        delete_option('agegateway_show_agegateway_logo');
+        delete_option('agegateway_show_background_image');
     }
     
     public function run()
@@ -65,6 +70,9 @@ class AgeGatewayWordpress
                 $gate = new AgeGateway(get_site_url());
                 $gate->setTitle(get_option('agegateway_title'));
                 $gate->setLogo($logo);
+                
+                $gate->setShowAgeGatewayLogo(get_option('agegateway_show_agegateway_logo'));
+                $gate->setShowBackgroundImage(get_option('agegateway_show_background_image'));
                 
                 $gate->setSiteName(get_option('agegateway_site_name'));
                 $gate->setCustomText(get_option('agegateway_custom_text'));
@@ -153,6 +161,9 @@ class AgeGatewayWordpress
             
             update_option('agegateway_title', sanitize_text_field(stripslashes($_POST['agegateway_title'])));
             update_option('agegateway_site_logo', intval($_POST['agegateway_site_logo']));
+            
+            update_option('agegateway_show_agegateway_logo', (bool)$_POST['agegateway_show_agegateway_logo']);
+            update_option('agegateway_show_background_image', (bool)$_POST['agegateway_show_background_image']);
             
             update_option('agegateway_site_name', sanitize_text_field(stripslashes($_POST['agegateway_site_name'])));
             update_option('agegateway_custom_text', sanitize_text_field(stripslashes($_POST['agegateway_custom_text'])));
